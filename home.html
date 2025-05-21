@@ -7,13 +7,15 @@
 </head>
 <body>
     <div>
-        <div id="header">
-            <caption id="tableCaption">Rented Cars</caption>
-            <div>
-                <button id="AddCar">Add Car</button>
-                <button id="RefreshCar">Refresh</button>
+        <caption>
+            <div class="caption-container">
+                <div class="caption-title">Car List</div>
+                <div class="caption-buttons">
+                    <button id="AddCar">Add Car</button>
+                    <button id="RefreshCar">Refresh</button>
+                </div>
             </div>
-        </div>
+        </caption>
         <form id ="CarForm" style="display: none;">
             <table>
                 <tr>
@@ -22,8 +24,8 @@
                         <input type="text" id="Model" name="Model">
                     </td>
                     <td>
-                        <label for="Price">Price Per Day:</label><br>
-                        <input type="text" id="Price" name="Price">
+                        <label for="Price">Price:</label><br>
+                        $ <input type="number" id="Price" name="Price" style="width: 30%;"> / day
                     </td>
                 </tr>
                 <tr>

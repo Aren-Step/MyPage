@@ -15,17 +15,20 @@ body {
 #CarTable th {
     background-color: #f2f2f2;
 }
-#header {
+#CarTable caption .caption-container {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     width: 70%;
-    margin: 20px auto 0px auto;
 }
-#tableCaption {
-    font-size: 24px;
+.caption-title {
+    text-align: left;
     font-weight: bold;
-    margin-bottom: 10px;
 }
+.caption-buttons {
+    text-align: right;
+}
+
 button {
     padding: 8px 12px;
     background-color: #ff8080;
