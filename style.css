@@ -1,0 +1,63 @@
+body { 
+    font-family: Arial, sans-serif; background: #e0bfbf; 
+}
+#CarTable {
+    border-collapse: collapse;
+    width: 70%;
+    margin: 20px auto;
+}
+#CarTable th, td {
+    border: 1px solid #000000;
+    padding: 8px 12px;
+    text-align: center;
+    background-color: #cac6c6;
+}
+#CarTable th {
+    background-color: #f2f2f2;
+}
+#header {
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 20px auto 0px auto;
+}
+#tableCaption {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+button {
+    padding: 8px 12px;
+    background-color: #ff8080;
+}
+#CarForm {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 20px auto;
+    background-color: #ffd5d5;
+    padding: 20px;
+    border-radius: 8px;
+}
+#CarForm table {
+    width: 100%;
+    margin-bottom: 20px;
+    border: none;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+#CarForm td {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+}
+#CarForm label {
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+#CarForm input {
+    margin-bottom: 12px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
