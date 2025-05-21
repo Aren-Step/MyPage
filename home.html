@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rented Cars</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #e0bfbf; }
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 8px 12px;
+            text-align: center;
+            background-color: #cac6c6;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #header {
+            justify-content: space-between;
+            align-items: center;
+            width: 70%;
+            margin: 20px auto 0px auto;
+        }
+        #tableCaption {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #ff8080;
+        }
+        #CarForm {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            margin: 20px auto;
+            background-color: #ffd5d5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        #CarForm label {
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        #CarForm input {
+            margin-bottom: 12px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <div id="header">
+            <caption id="tableCaption">Rented Cars</caption>
+            <div>
+                <button id="AddCar">Add Car</button>
+                <button id="RefreshCar">Refresh</button>
+            </div>
+        </div>
+        <div id ="CarForm" style="display: none;">
+            <form>
+                <div style = "display: flex; justify-content: space-between;">
+                    <div>
+                        <label for="Model">Model:</label><br>
+                        <input type="text" id="Model" name="Model">
+                    </div>
+                    <div>
+                        <label for="Price">Price:</label><br>
+                        <input type="text" id="Price" name="Price">
+                    </div>
+                </div>
+                <div style = "display: flex; justify-content: space-between;">
+                    <div>
+                        <label for="Shop">Shop:</label><br>
+                        <input type="text" id="Shop" name="Shop">
+                    </div>
+                    <div>
+                        <label for="RentingDate">Renting Date:</label><br>
+                        <input type="text" id="RentingDate" name="RentingDate">
+                    </div>
+                </div>
+                
+                <button id="Add">Add Car</button>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Shop</th>
+                    <th>Renting Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Toyota Corolla</td>
+                    <td>$45/day</td>
+                    <td>City Rentals</td>
+                    <td>2024-06-01</td>
+                </tr>
+                <tr>
+                    <td>Honda Civic</td>
+                    <td>$50/day</td>
+                    <td>AutoHire</td>
+                    <td>2024-06-03</td>
+                </tr>
+                <tr>
+                    <td>Ford Focus</td>
+                    <td>$40/day</td>
+                    <td>QuickCars</td>
+                    <td>2024-06-05</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        fetch('cars.xml')
+        .then(response => response.text())
+        .then(data => {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(data, "text/xml");
+            const cars = xmlDoc.getElementsByTagName("car");
+            const tableBody = document.querySelector("tbody");
+
+            for (let i = 0; i < cars.length; i++) {
+                const car = cars[i];
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${car.getElementsByTagName("Model")[0].textContent}</td>
+                    <td>${car.getElementsByTagName("Price")[0].textContent}</td>
+                    <td>${car.getElementsByTagName("Shop")[0].textContent}</td>
+                    <td>${car.getElementsByTagName("RentingDate")[0].textContent}</td>
+                `;
+                tableBody.appendChild(row);
+            }
+        });
+
+        let form = document.getElementById('CarForm');
+        document.getElementById('AddCar').addEventListener('click', function() {
+            if (form.style.display === "none") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        });
+        document.getElementById('Add').addEventListener('click', function(event) {
+            event.preventDefault();
+            const model = document.getElementById('Model').value;
+            const price = document.getElementById('Price').value;
+            const shop = document.getElementById('Shop').value;
+            const rentingDate = document.getElementById('RentingDate').value;
+
+            if (model && price && shop && rentingDate) {
+                const tableBody = document.querySelector("tbody");
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${model}</td>
+                    <td>${price}</td>
+                    <td>${shop}</td>
+                    <td>${rentingDate}</td>
+                `;
+                tableBody.appendChild(row);
+
+                const addedCarXml = `
+                    <Car>
+                        <Model>${model}</Model>
+                        <Price>${price}</Price>
+                        <Shop>${shop}</Shop>
+                        <RentingDate>${rentingDate}</RentingDate>
+                    </Car>
+                `;
+                
+
+
+                form.style.display = "none";
+            } else {
+                alert("Please fill in all fields.");
+            }
+        });
+        document.getElementById('RefreshCar').addEventListener('click', function() {
+            location.reload();
+        });
+    </script>
+</body>
+</html>
