@@ -1,6 +1,6 @@
 body { 
     font-family: Arial, sans-serif; background: #e0bfbf; 
-    min-width: 500px;
+    min-width: 720px;
 }
 button {
     width: 80px;
@@ -9,13 +9,15 @@ button {
     background-color: #ff8080;
     border-radius: 4px;
 }
-#container {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+
 }
-#container .caption-container{
+.container .caption-container{
     display: flex;
     flex-direction: row;
     width: 70%;
