@@ -32,20 +32,27 @@ document.getElementById('Add').addEventListener('click', function(event) {
                 "Content-Type": "application/xml"
             },
             body: addedCarXml
-        }).then(response => {
-            if (response.ok) {
-                location.reload();
-            } else {
-                alert("Failed to add car.");
-            }
-        }).catch(() => {
-            alert("Error connecting to server.");
         });
+        // .then(response => {
+        //     if (response.ok) {
+        //         location.reload();
+        //     } else {
+        //         alert("Failed to add car.");
+        //     }
+        // }).catch(() => {
+        //     alert("Error connecting to server.");
+        // });
         
         form.style.display = "none";
     } else {
         alert("Please fill in all fields.");
     }
+
+    let formInputs = form.querySelectorAll("input[type='text'], input[type='date'], input[type='number']");
+    formInputs.forEach(input => {
+        input.value = "";
+    });
+
 });
 
 document.getElementById('Reset').addEventListener('click', function(event) {
@@ -76,8 +83,6 @@ function readXml(url) {
                 price = car.getElementsByTagName("Price")[0].innerHTML;
                 shop = car.getElementsByTagName("Shop")[0].innerHTML;
                 rentingDate = car.getElementsByTagName("RentingDate")[0].innerHTML;
-                console.log(car);
-                console.log(model, price, shop, rentingDate);
 
                 var row = document.createElement("tr");
                 row.innerHTML = `
@@ -88,8 +93,10 @@ function readXml(url) {
                 `;
                 tableBody.appendChild(row);
             }
+        })
+        .catch(() => {
+            alert("Error loading XML file. See console for details.");
         });
-        console.log(tableBody);
 
     return tableBody;
 }
