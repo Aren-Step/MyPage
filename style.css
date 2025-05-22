@@ -1,6 +1,31 @@
 body { 
     font-family: Arial, sans-serif; background: #e0bfbf; 
+    min-width: 500px;
 }
+button {
+    padding: 8px 12px;
+    background-color: #ff8080;
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#container .caption-container{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-between;
+    align-items: center;
+}
+.caption-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+}
+
+
 #CarTable {
     border-collapse: collapse;
     width: 70%;
@@ -15,27 +40,8 @@ body {
 #CarTable th {
     background-color: #f2f2f2;
 }
-#CarTable caption .caption-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 70%;
-}
-.caption-title {
-    text-align: left;
-    font-weight: bold;
-}
-.caption-buttons {
-    text-align: right;
-}
 
-button {
-    padding: 8px 12px;
-    background-color: #ff8080;
-}
 #CarForm {
-    display: flex;
-    flex-direction: column;
     width: 70%;
     margin: 20px auto;
     background-color: #ffd5d5;
