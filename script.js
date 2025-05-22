@@ -13,7 +13,7 @@ document.getElementById('AddCar').addEventListener('click', function() {
 document.getElementById('Add').addEventListener('click', function(event) {
     event.preventDefault();
     const model = document.getElementById("Model").value;
-    const price = `\$${document.getElementById("Price").value}/day`;
+    const price = document.getElementById("Price").value;
     const shop = document.getElementById("Shop").value;
     const rentingDate = document.getElementById("RentingDate").value;
 
@@ -21,7 +21,7 @@ document.getElementById('Add').addEventListener('click', function(event) {
         const addedCarXml = `
             <Car>
                 <Model>${model}</Model>
-                <Price>${price}</Price>
+                <Price>$${price}/day</Price>
                 <Shop>${shop}</Shop>
                 <RentingDate>${rentingDate}</RentingDate>
             </Car>
@@ -50,32 +50,46 @@ document.getElementById('Add').addEventListener('click', function(event) {
 
 document.getElementById('Reset').addEventListener('click', function(event) {
     event.preventDefault();
-    let formElements = form.querySelectorAll("input[type='text'], input[type='date'], input[type='number']");
-    formElements.forEach(element => {
-        element.value = "";
+    let formInputs = form.querySelectorAll("input[type='text'], input[type='date'], input[type='number']");
+    formInputs.forEach(input => {
+        input.value = "";
     });
 });
 
 document.getElementById('RefreshCar').addEventListener('click', function(event) {
     event.preventDefault();
-    fetch('cars.xml')
-        .then(response => response.text())
-        .then(data => {
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(data, "text/xml");
-            const cars = xmlDoc.getElementsByTagName("car");
-            const tableBody = document.getElementById("CarTable").querySelector("tbody");
-            tableBody.innerHTML = "";
+    readXml("cars.xml");
+});
 
+function readXml(url) {
+    var tableBody = document.getElementById("CarTable").querySelector("tbody");
+    fetch(url)
+        .then(response => response.text())
+        .then((data) => {
+            let parser = new DOMParser();
+            xml = parser.parseFromString(data, "text/xml");
+            var cars = xml.getElementsByTagName("Car");
+            var model, price, shop, rentingDate;
+            tableBody.innerHTML = "";
             for (let car of cars) {
-                const row = document.createElement("tr");
+                model = car.getElementsByTagName("Model")[0].innerHTML;
+                price = car.getElementsByTagName("Price")[0].innerHTML;
+                shop = car.getElementsByTagName("Shop")[0].innerHTML;
+                rentingDate = car.getElementsByTagName("RentingDate")[0].innerHTML;
+                console.log(car);
+                console.log(model, price, shop, rentingDate);
+
+                var row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${car.getElementsByTagName("Model")[0].textContent}</td>
-                    <td>${car.getElementsByTagName("Price")[0].textContent}</td>
-                    <td>${car.getElementsByTagName("Shop")[0].textContent}</td>
-                    <td>${car.getElementsByTagName("RentingDate")[0].textContent}</td>
+                    <td>${model}</td>
+                    <td>${price}</td>
+                    <td>${shop}</td>
+                    <td>${rentingDate}</td>
                 `;
                 tableBody.appendChild(row);
             }
         });
-});
+        console.log(tableBody);
+
+    return tableBody;
+}

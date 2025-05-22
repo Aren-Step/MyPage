@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Cars>
     <Car>
-        <Model>Toyota Corolla</Model>
-        <Price>$45/day</Price>
-        <Shop>City Rentals</Shop>
+        <Model>Toyota Supra</Model>
+        <Price>$455/day</Price>
+        <Shop>car.am 1</Shop>
         <RentingDate>2024-06-01</RentingDate>
     </Car>
     <Car>
         <Model>Honda Civic</Model>
-        <Price>$50/day</Price>
-        <Shop>AutoHire</Shop>
+        <Price>$5/day</Price>
+        <Shop>car.am 2</Shop>
         <RentingDate>2024-09-01</RentingDate>
-    </Car>
-    <Car>
-        <Model>Ford Focus</Model>
-        <Price>$40/day</Price>
-        <Shop>QuickCars</Shop>
-        <RentingDate>2024-12-01</RentingDate>
     </Car>
 </Cars>
