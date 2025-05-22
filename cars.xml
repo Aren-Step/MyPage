@@ -12,4 +12,10 @@
         <Shop>car.am 2</Shop>
         <RentingDate>2024-09-01</RentingDate>
     </Car>
+    <Car>
+        <Model>Suzuki</Model>
+        <Price>$5000/day</Price>
+        <Shop>Car super shop</Shop>
+        <RentingDate>2001-09-11</RentingDate>
+    </Car>
 </Cars>
