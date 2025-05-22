@@ -3,17 +3,19 @@ let form = document.getElementById('CarForm');
 document.getElementById('AddCar').addEventListener('click', function() {
     if (form.style.display === "none") {
         form.style.display = "block";
+        document.getElementById('AddCar').innerText = "Cancel";
     } else {
         form.style.display = "none";
+        document.getElementById('AddCar').innerText = "Add Car";
     }
 });
 
 document.getElementById('Add').addEventListener('click', function(event) {
     event.preventDefault();
-    const model = document.getElementById('Model').value;
-    const price = document.getElementById('Price').value.join('/day');
-    const shop = document.getElementById('Shop').value;
-    const rentingDate = document.getElementById('RentingDate').value.format("yyyy-MM-dd");
+    const model = document.getElementById("Model").value;
+    const price = `\$${document.getElementById("Price").value}/day`;
+    const shop = document.getElementById("Shop").value;
+    const rentingDate = document.getElementById("RentingDate").value;
 
     if (model && price && shop && rentingDate) {
         const addedCarXml = `
@@ -24,26 +26,34 @@ document.getElementById('Add').addEventListener('click', function(event) {
                 <RentingDate>${rentingDate}</RentingDate>
             </Car>
         `;
-        fetch('cars.xml', {
-            method: 'POST',
+        fetch("cars.xml", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/xml'
+                "Content-Type": "application/xml"
             },
             body: addedCarXml
         }).then(response => {
             if (response.ok) {
                 location.reload();
             } else {
-                alert('Failed to add car.');
+                alert("Failed to add car.");
             }
         }).catch(() => {
-            alert('Error connecting to server.');
+            alert("Error connecting to server.");
         });
         
         form.style.display = "none";
     } else {
         alert("Please fill in all fields.");
     }
+});
+
+document.getElementById('Reset').addEventListener('click', function(event) {
+    event.preventDefault();
+    let formElements = form.querySelectorAll("input[type='text'], input[type='date'], input[type='number']");
+    formElements.forEach(element => {
+        element.value = "";
+    });
 });
 
 document.getElementById('RefreshCar').addEventListener('click', function(event) {

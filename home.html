@@ -21,25 +21,26 @@
                 <tr>
                     <td>
                         <label for="Model">Model:</label><br>
-                        <input type="text" id="Model" name="Model">
+                        <input type="text" id="Model" required>
                     </td>
                     <td>
                         <label for="Price">Price:</label><br>
-                        $ <input type="number" id="Price" name="Price" style="width: 30%;"> / day
+                        $ <input type="number" id="Price" required style="width: 30%;"> / day
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="Shop">Shop:</label><br>
-                        <input type="text" id="Shop" name="Shop">
+                        <input type="text" id="Shop" required>
                     </td>
                     <td>
                         <label for="RentingDate">Renting Date:</label><br>
-                        <input type="date" id="RentingDate" name="RentingDate">
+                        <input type="date" id="RentingDate" required>
                     </td>
                 </tr>
             </table>            
             <button id="Add">Add Car</button>
+            <button id="Reset" style="margin-left: 10px;">Reset</button>
         </form>
         <table id="CarTable">
             <thead>

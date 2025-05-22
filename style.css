@@ -3,8 +3,11 @@ body {
     min-width: 500px;
 }
 button {
+    width: 80px;
+    height: 40px;
     padding: 8px 12px;
     background-color: #ff8080;
+    border-radius: 4px;
 }
 #container {
     display: flex;
@@ -46,14 +49,11 @@ button {
     margin: 20px auto;
     background-color: #ffd5d5;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 #CarForm table {
     width: 100%;
     margin-bottom: 20px;
-    border: none;
-    background-color: transparent;
-    border-collapse: collapse;
 }
 #CarForm td {
     border: none;
