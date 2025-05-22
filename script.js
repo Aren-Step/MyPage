@@ -2,8 +2,8 @@
 var form = document.getElementById('CarForm');
 
 // Create an XML document
-var xmlData = (() => {
-    var xmlDoc = document.implementation.createDocument(null, 'Cars');
+var xmlDoc = document.implementation.createDocument(null, 'Cars');
+var xmlData = () => {
     
     var serializer = new XMLSerializer();
     var xmlString = serializer.serializeToString(xmlDoc.documentElement);
@@ -17,7 +17,7 @@ var xmlData = (() => {
         element: xmlDoc.documentElement,
         name: 'cars.xml',
     };
-})();
+};
 
 // Open / close form
 function toggleForm() {
@@ -59,8 +59,8 @@ document.getElementById('Add').addEventListener('click', function(event) {
                 <Shop>${shop}</Shop>
                 <RentingDate>${rentingDate}</RentingDate>
             `;
-            xmlData.element.appendChild(document.createElement('Car'));
-            xmlData.element.lastChild.innerHTML = addedCarXml;
+            xmlData().element.appendChild(document.createElement('Car'));
+            xmlData().element.lastChild.innerHTML = addedCarXml;
             alert("Car added successfully!");
         } catch {
             alert("Error adding car. See console for details.");
@@ -83,7 +83,7 @@ document.getElementById('Reset').addEventListener('click', function(event) {
 // Refresh button behavior
 document.getElementById('RefreshCar').addEventListener('click', function(event) {
     event.preventDefault();
-    readXml(xmlData.url);
+    readXml(xmlData().url);
 });
 
 // Load XML file
@@ -96,7 +96,6 @@ function readXml(url) {
             xml = parser.parseFromString(data, "application/xml");
             var cars = xml.getElementsByTagName("Car");
             var model, price, shop, rentingDate;
-            tableBody.innerHTML = "";
             for (let car of cars) {
                 model = car.getElementsByTagName("Model")[0].innerHTML;
                 price = car.getElementsByTagName("Price")[0].innerHTML;
